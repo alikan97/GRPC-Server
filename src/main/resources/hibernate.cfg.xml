@@ -1,0 +1,25 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/Crypto</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">abcd1234</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+
+<!--        &lt;!&ndash; SQL dialect &ndash;&gt;-->
+<!--        <property name="dialect">org.hibernate.dialect.H2Dialect</property>-->
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <mapping class="com.example.db.entities.Asset"/>
+        <mapping class="com.example.db.entities.AssetQuote"/>
+        <mapping class="com.example.db.entities.RecentTrades"/>
+    </session-factory>
+</hibernate-configuration>

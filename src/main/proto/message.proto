@@ -1,0 +1,63 @@
+syntax = "proto3";
+option java_multiple_files = true;
+//option java_outer_classname = "cryptoProto";
+//
+//option java_package = "github.com/alikan-97/server";
+
+import "google/protobuf/empty.proto";
+
+package com.server.protos;
+
+message asset {
+  string symbol = 1;
+  string name = 2;
+}
+
+message getAssetReq {
+  string symbol = 1;
+}
+
+message getAssetResp {
+  asset response = 1;
+}
+
+message getAllAssetResp {
+  repeated asset response = 1;
+}
+
+//message updateAssetResp {
+//  string response = 1;
+//}
+//
+//message recentTradesReq {
+//  google.protobuf.Timestamp since = 1;
+//  string symbol = 2;
+//}
+//
+//message recentTradesResp {
+//  string assetName = 1;
+//  string assetCode = 2;
+//  string id = 3;
+//  double quantity = 4;
+//  google.protobuf.Timestamp time = 5;
+//  google.protobuf.Timestamp updatedAt = 6;
+//}
+//
+//message getQuoteReq {
+//  string symbol = 1;
+//}
+//
+//message quoteResp {
+//  string symbol = 1;
+//  double price = 2;
+//  google.protobuf.Timestamp lastUpdated = 3;
+//}
+
+service Crypto {
+  rpc getAllAsset(google.protobuf.Empty) returns (getAllAssetResp);
+  rpc getAsset(getAssetReq) returns (getAssetResp);
+//  rpc updateAsset(asset) returns (updateAssetResp);
+//  rpc getRecentTrades(recentTradesReq) returns (recentTradesResp);
+//  rpc getCurrentQuote(getQuoteReq) returns (quoteResp);
+//  rpc updateQuotes(getQuoteReq) returns (google.protobuf.Empty);
+}
