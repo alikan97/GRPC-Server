@@ -3,6 +3,7 @@ package com.example.db.service;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -23,10 +24,11 @@ public class genericDaoImpl<T> implements IGenericServiceDao<T> {
     @SuppressWarnings({"unchecked", "deprecation"})
     public List<T> findAll() {
         try {
-            sessionFactory.getCurrentSession().beginTransaction();
-            return sessionFactory.getCurrentSession().createQuery("from allassets").list();
+            Session currentSession = sessionFactory.getCurrentSession();
+            currentSession.beginTransaction();
+            return currentSession.createQuery(String.format("from %s", table.getSimpleName())).list();
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.printf("Error %s", e.toString());
             return null;
         }
         finally {

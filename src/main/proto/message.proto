@@ -25,24 +25,20 @@ message getAllAssetResp {
   repeated asset response = 1;
 }
 
-//message updateAssetResp {
-//  string response = 1;
-//}
-//
-//message recentTradesReq {
-//  google.protobuf.Timestamp since = 1;
-//  string symbol = 2;
-//}
-//
-//message recentTradesResp {
-//  string assetName = 1;
-//  string assetCode = 2;
-//  string id = 3;
-//  double quantity = 4;
-//  google.protobuf.Timestamp time = 5;
-//  google.protobuf.Timestamp updatedAt = 6;
-//}
-//
+message recentTradesReq {
+  string since = 1;
+  string symbol = 2;
+}
+
+message recentTradesResp {
+  string assetName = 1;
+  string assetCode = 2;
+  string id = 3;
+  double quantity = 4;
+  string time = 5;
+  string updatedAt = 6;
+}
+
 //message getQuoteReq {
 //  string symbol = 1;
 //}
@@ -56,8 +52,7 @@ message getAllAssetResp {
 service Crypto {
   rpc getAllAsset(google.protobuf.Empty) returns (getAllAssetResp);
   rpc getAsset(getAssetReq) returns (getAssetResp);
-//  rpc updateAsset(asset) returns (updateAssetResp);
-//  rpc getRecentTrades(recentTradesReq) returns (recentTradesResp);
+  rpc getRecentTrades(recentTradesReq) returns (recentTradesResp);
 //  rpc getCurrentQuote(getQuoteReq) returns (quoteResp);
 //  rpc updateQuotes(getQuoteReq) returns (google.protobuf.Empty);
 }

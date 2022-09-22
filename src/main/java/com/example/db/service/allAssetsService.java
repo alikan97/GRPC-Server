@@ -1,19 +1,19 @@
 package com.example.db.service;
 
-import com.example.db.entities.Asset;
+import com.example.db.entities.allassets;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.*;
 
-public class allAssetsService extends genericDaoImpl<Asset> {
+public class allAssetsService extends genericDaoImpl<allassets> {
     public allAssetsService(SessionFactory sessionFactory) {
-        super(sessionFactory, (Class<Asset>) new Asset().getClass());
+        super(sessionFactory, (Class<allassets>) new allassets().getClass());
     }
 
-    public Asset findBySymbol (String symbol) {
+    public allassets findBySymbol (String symbol) {
         sessionFactory.getCurrentSession().beginTransaction();
 
         Query query = sessionFactory.getCurrentSession().createQuery("from allassets a where a.assetCode=:symbol");
-        Asset result = (Asset) query.setParameter("symbol", symbol).getSingleResult();
+        allassets result = (allassets) query.setParameter("symbol", symbol).getSingleResult();
 
         sessionFactory.getCurrentSession().getTransaction().commit();
         return result;

@@ -1,17 +1,11 @@
 package com.example.Main;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
-import com.example.db.entities.Asset;
-import com.example.db.service.allAssetsService;
 import com.example.db.util.dbConfig;
-//import com.example.services.Service;
 import com.example.services.Service;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 

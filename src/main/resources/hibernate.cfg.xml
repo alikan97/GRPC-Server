@@ -18,8 +18,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="com.example.db.entities.Asset"/>
+        <mapping class="com.example.db.entities.allassets"/>
         <mapping class="com.example.db.entities.AssetQuote"/>
-        <mapping class="com.example.db.entities.RecentTrades"/>
+        <mapping class="com.example.db.entities.recenttrades"/>
     </session-factory>
 </hibernate-configuration>

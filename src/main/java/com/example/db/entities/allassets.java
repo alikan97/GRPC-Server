@@ -3,7 +3,7 @@ package com.example.db.entities;
 import jakarta.persistence.*;
 
 @Entity(name = "allassets")
-public class Asset {
+public class allassets {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -21,12 +21,12 @@ public class Asset {
         return assetCode;
     }
 
-    public Asset(String assetName, String assetCode) {
+    public allassets(String assetName, String assetCode) {
         this.assetName = assetName;
         this.assetCode = assetCode;
     }
 
-    public Asset() {
+    public allassets() {
     }
     @Override
     public String toString() {

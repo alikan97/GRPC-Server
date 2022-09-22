@@ -1,13 +1,13 @@
 package com.example.db.util;
 
-import com.example.db.entities.Asset;
+import com.example.db.entities.allassets;
 import com.server.protos.asset;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class convertToProtoClass {
-    public static asset convertToAsset(Asset rawClass) {
+    public static asset convertToAsset(allassets rawClass) {
         asset converted = asset.newBuilder().setName(
                 rawClass.getAssetName()).setSymbol(rawClass.getAssetCode())
                 .build();
@@ -15,10 +15,10 @@ public class convertToProtoClass {
         return converted;
     }
 
-    public static List<asset> convertMultipleAsset (List<Asset> rawClass) {
+    public static List<asset> convertMultipleAsset (List<allassets> rawClass) {
         List<asset> converted = new ArrayList<>();
 
-        for(Asset var : rawClass) {
+        for(allassets var : rawClass) {
             converted.add(convertToAsset(var));
         }
 
