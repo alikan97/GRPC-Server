@@ -21,14 +21,14 @@ public class recenttrades {
     private double quantity;
 
     @Column(name = "tradetime")
-    private LocalDateTime tradeTime;
+    private Long tradeTime;
 
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
     public recenttrades() {}
 
-    public recenttrades(String symbolName, double price, double quantity, LocalDateTime tradeTime, LocalDateTime updatedAt) {
+    public recenttrades(String symbolName, double price, double quantity, Long tradeTime, LocalDateTime updatedAt) {
         this.symbolName = symbolName;
         this.price = price;
         this.quantity = quantity;
@@ -68,11 +68,11 @@ public class recenttrades {
         this.quantity = quantity;
     }
 
-    public LocalDateTime getTradeTime() {
+    public Long getTradeTime() {
         return tradeTime;
     }
 
-    public void setTradeTime(LocalDateTime tradeTime) {
+    public void setTradeTime(Long tradeTime) {
         this.tradeTime = tradeTime;
     }
 

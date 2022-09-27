@@ -1,11 +1,12 @@
 package com.example.client;
 
-import com.server.protos.CryptoGrpc;
-import com.server.protos.getAssetReq;
-import com.server.protos.getAssetResp;
+import com.server.protos.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import com.google.protobuf.Empty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class client {
     public static void main(String[] args) throws InterruptedException {
@@ -14,8 +15,7 @@ public class client {
                 .build();
 
         CryptoGrpc.CryptoBlockingStub stub = CryptoGrpc.newBlockingStub(channel);
-
-        getAssetResp ed = stub.getAsset(getAssetReq.newBuilder().setSymbol("ETH").build());
-        System.out.println(ed);
+        updateQuoteReq reqq = updateQuoteReq.newBuilder().setSymbol("BTCUSDT").setUpdatedPrice(999999).build();
+        stub.updateQuotes(reqq);
     }
 }

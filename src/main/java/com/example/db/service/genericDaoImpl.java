@@ -43,10 +43,10 @@ public class genericDaoImpl<T> implements IGenericServiceDao<T> {
         }
         try {
             sessionFactory.getCurrentSession().beginTransaction();
-            sessionFactory.getCurrentSession().saveOrUpdate(entity);
+            sessionFactory.getCurrentSession().save(entity);
             return entity;
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.printf("Error: %s", e.toString());
             return null;
         }
         finally {
@@ -63,7 +63,7 @@ public class genericDaoImpl<T> implements IGenericServiceDao<T> {
             sessionFactory.getCurrentSession().merge(entity);
             return 1;
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.printf("Error: %s", e.toString());
             return -1;
         }
         finally {
@@ -76,7 +76,7 @@ public class genericDaoImpl<T> implements IGenericServiceDao<T> {
             sessionFactory.getCurrentSession().beginTransaction();
             sessionFactory.getCurrentSession().delete(entity);
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.printf("Error: %s", e.toString());
         }
         finally {
             sessionFactory.getCurrentSession().getTransaction().commit();
