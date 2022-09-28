@@ -2,6 +2,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 package com.server.protos;
 
@@ -48,15 +49,16 @@ message addRecentTradeReq {
 message addRecentTradeReqMulti {
   repeated addRecentTradeReq recentTrade = 1;
 }
-//message getQuoteReq {
-//  string symbol = 1;
-//}
-//
-//message quoteResp {
-//  string symbol = 1;
-//  double price = 2;
-//  google.protobuf.Timestamp lastUpdated = 3;
-//}
+
+message getQuoteReq {
+  string symbol = 1;
+}
+
+message quoteResp {
+  string symbol = 1;
+  double price = 2;
+  google.protobuf.Timestamp lastUpdated = 3;
+}
 
 message updateQuoteReq {
   string symbol = 1;
@@ -68,6 +70,6 @@ service Crypto {
   rpc getAsset(getAssetReq) returns (getAssetResp);
   rpc getRecentTrades(recentTradesReq) returns (recentTradesMultiple);
   rpc addRecentTrade(addRecentTradeReqMulti) returns (google.protobuf.Empty);
-//  rpc getCurrentQuote(getQuoteReq) returns (quoteResp);
+  rpc getCurrentQuote(getQuoteReq) returns (quoteResp);
   rpc updateQuotes(updateQuoteReq) returns (google.protobuf.Empty);
 }

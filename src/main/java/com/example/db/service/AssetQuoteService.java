@@ -11,15 +11,19 @@ public class AssetQuoteService extends genericDaoImpl<AssetQuote> {
     }
 
     public void updateQuote(AssetQuote quoteToUpdate) {
-        String queryString = "Update AssetQuote as A set A.Price=:newPrice, A.RecordedAt=:recordedTime where A.SymbolName=:symbolName";
-        sessionFactory.getCurrentSession().beginTransaction();
+        try {
+            String queryString = "Update AssetQuote as A set A.Price=:newPrice, A.RecordedAt=:recordedTime where A.SymbolName=:symbolName";
+            sessionFactory.getCurrentSession().beginTransaction();
 
-        sessionFactory.getCurrentSession().createQuery(queryString)
-                .setParameter("newPrice", quoteToUpdate.getPrice())
-                .setParameter("recordedTime", quoteToUpdate.getRecordedAt())
-                .setParameter("symbolName", quoteToUpdate.getSymbolName())
-                .executeUpdate();
+            sessionFactory.getCurrentSession().createQuery(queryString)
+                    .setParameter("newPrice", quoteToUpdate.getPrice())
+                    .setParameter("recordedTime", quoteToUpdate.getRecordedAt())
+                    .setParameter("symbolName", quoteToUpdate.getSymbolName())
+                    .executeUpdate();
 
-        sessionFactory.getCurrentSession().getTransaction().commit();
+            sessionFactory.getCurrentSession().getTransaction().commit();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

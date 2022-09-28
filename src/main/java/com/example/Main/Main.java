@@ -3,6 +3,7 @@ package com.example.Main;
 import java.io.IOException;
 
 import com.example.db.util.dbConfig;
+import com.example.services.ExceptionHandler;
 import com.example.services.Service;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -15,7 +16,10 @@ public class Main {
         SessionFactory sessionFactory = dbConfig.getSessionFactory();
 
        // Create a new server to listen on port 8080
-        Server server = ServerBuilder.forPort(8080).addService(new Service(sessionFactory)).build();
+        Server server = ServerBuilder.forPort(8080)
+                .addService(new Service(sessionFactory))
+                .intercept(new ExceptionHandler())
+                .build();
 
         server.start();
 
