@@ -57,7 +57,7 @@ message getQuoteReq {
 message quoteResp {
   string symbol = 1;
   double price = 2;
-  google.protobuf.Timestamp lastUpdated = 3;
+  string lastUpdated = 3;
 }
 
 message updateQuoteReq {

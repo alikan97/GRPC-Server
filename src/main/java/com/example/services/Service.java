@@ -14,8 +14,10 @@ import io.grpc.stub.StreamObserver;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.SessionFactory;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.OffsetTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -39,7 +41,7 @@ public class Service extends CryptoGrpc.CryptoImplBase {
 
         allassets result = assetsService.findBySymbol(request.getSymbol());
 
-        if (result.getAssetCode().isEmpty()) {
+        if (result == null) {
             String errorResponse = String.format("Could not find asset %s", request.getSymbol());
             throw new EntityNotFoundException(errorResponse);
         }
@@ -60,6 +62,8 @@ public class Service extends CryptoGrpc.CryptoImplBase {
         }
 
         List<asset> convertedResult = convertToProtoClass.convertMultipleAsset(result);
+
+        responseObserver.onError(new EntityNotFoundException("Could not find it"));
 
         responseObserver.onNext(getAllAssetResp.newBuilder().addAllResponse(convertedResult).build());
 
@@ -127,6 +131,7 @@ public class Service extends CryptoGrpc.CryptoImplBase {
         AssetQuote finalQuote = quote.stream().filter(assetQuote ->
                 request.getSymbol().equals(assetQuote.getSymbolName()))
                 .findFirst().orElse(null);
+
         if (finalQuote.getSymbolName().isEmpty()) {
             String errorResponse = String.format("Could not retrieve quote for asset %s",
                     request.getSymbol());
@@ -134,10 +139,14 @@ public class Service extends CryptoGrpc.CryptoImplBase {
             throw new EntityNotFoundException(errorResponse);
         }
 
+        OffsetTime now = OffsetTime.now();
+        Duration duration = Duration.between(finalQuote.getRecordedAt(), now);
+        String formattedTime = String.format("Last updated %s minutes ago", duration.toMinutes());
+
         quoteResp response = quoteResp.newBuilder()
                 .setPrice(finalQuote.getPrice())
                 .setSymbol(finalQuote.getSymbolName())
-                .setLastUpdated(Timestamp.newBuilder().setSeconds(finalQuote.getRecordedAt().getSecond()))
+                .setLastUpdated(formattedTime)
                 .build();
 
         responseObserver.onNext(response);
