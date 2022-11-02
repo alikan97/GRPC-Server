@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8085"
+    environment:
+      - DBNAME=Crypto
+      - HOST=host.docker.internal
+      - PORT=5432
+      - USER=postgres
+      - PWD=abcd1234
+    networks:
+      - grpc-network
+networks:
+  grpc-network:
+    external: true

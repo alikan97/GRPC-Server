@@ -1,16 +1,16 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->
-        <property name="connection.driver_class"></property>
-        <property name="connection.url"></property>
-        <property name="connection.username"></property>
-        <property name="connection.password"></property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://${HOST}:${PORT}/${DBNAME}</property>
+        <property name="connection.username">${USER}</property>
+        <property name="connection.password">${PASSWORD}</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
 
-<!--        &lt;!&ndash; SQL dialect &ndash;&gt;-->
-<!--        <property name="dialect">org.hibernate.dialect.H2Dialect</property>-->
+        <!--        &lt;!&ndash; SQL dialect &ndash;&gt;-->
+        <!--        <property name="dialect">org.hibernate.dialect.H2Dialect</property>-->
 
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
@@ -23,3 +23,5 @@
         <mapping class="com.example.db.entities.recenttrades"/>
     </session-factory>
 </hibernate-configuration>
+
+<!-- jdbc:postgresql://localhost:5432/Crypto -->

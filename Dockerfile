@@ -9,6 +9,5 @@ FROM openjdk:16.0.2-jdk-buster
 WORKDIR /app
 COPY --from=builder /app/target/grpc-server-1.0.jar .
 # Use shell script to support passing application name and its arguments to the ENTRYPOINT
-EXPOSE 8080
-ENTRYPOINT java -DPOSTGRES_PORT=$port -DPOSTGRES_HOST=$host -DPOSTGRES_DB_NAME=$db -DPOSTGRES_USER=$user -DPOSTGRES_PASSWORD=$password -cp grpc-server-1.0.jar com.example.Main.Main
-#java -DPOST -cp grpc-server-1.0.jar com.example.Main.Main
+EXPOSE 8085
+ENTRYPOINT java -DHOST=$HOST -DPORT=$PORT -DDBNAME=$DBNAME -DUSER=$USER -DPASSWORD=$PWD -cp grpc-server-1.0.jar com.example.Main.Main

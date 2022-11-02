@@ -16,7 +16,7 @@ public class Main {
         SessionFactory sessionFactory = dbConfig.getSessionFactory();
 
        // Create a new server to listen on port 8080
-        Server server = ServerBuilder.forPort(8080)
+        Server server = ServerBuilder.forPort(8085)
                 .addService(new Service(sessionFactory))
                 .intercept(new ExceptionHandler())
                 .build();
