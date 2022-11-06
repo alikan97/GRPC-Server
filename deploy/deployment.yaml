@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: grpc-server
-        image: 074047115132.dkr.ecr.us-east-1.amazonaws.com/server:b07b7257bfbc580f6ffd2884365dd0ee6b92af06
+        image: 074047115132.dkr.ecr.us-east-1.amazonaws.com/server:8f1df9744deaca4ac51d56355086779c916d54f6
         imagePullPolicy: Always
         volumeMounts:
           - name: grpc-server-secrets
