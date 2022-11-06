@@ -9,7 +9,7 @@ FROM openjdk:16.0.2-jdk-buster
 WORKDIR /app
 COPY --from=builder /app/target/grpc-server-1.0.jar .
 COPY app.env .
-COPY /app/parseVariables.sh .
+COPY parseVariables.sh .
 
 RUN chmod +x parseVariables.sh
 RUN parseVariables.sh
