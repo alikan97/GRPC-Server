@@ -28,27 +28,27 @@ spec:
           - name: PG_HOST
             valueFrom:
               secretKeyRef:
-                name: PG_HOST
+                name: pghost
                 key: PG_HOST
           - name: PG_PORT
             valueFrom:
               secretKeyRef:
-                name: PG_PORT
+                name: pgport
                 key: PG_PORT
           - name: PG_USER
             valueFrom:
               secretKeyRef:
-                name: PG_USER
+                name: pguser
                 key: PG_USER
-          - name: PG_COPG_PASSNFIG
+          - name: PG_PASS
             valueFrom:
               secretKeyRef:
-                name: PG_PASS
+                name: pgpass
                 key: PG_PASS
           - name: PG_DB
             valueFrom:
               secretKeyRef:
-                name: PG_DB
+                name: pgdb
                 key: PG_DB
       volumes:
         - name: grpc-server-secrets
