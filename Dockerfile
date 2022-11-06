@@ -13,7 +13,7 @@ COPY app.env .
 RUN echo $(ls)
 RUN echo $(cat app.env)
 
-ENV $(cat app.env | xargs -L 1)
+CMD [ "export $(cat app.env | xargs -L 1)" ]
 
 RUN echo $PG_HOST
 
