@@ -6,6 +6,6 @@ spec:
   selector:
     app: grpc-server
   ports:
-  - port: 80
+  - port: 8085
     targetPort: 8085
   type: LoadBalancer

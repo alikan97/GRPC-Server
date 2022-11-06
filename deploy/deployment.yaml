@@ -18,10 +18,6 @@ spec:
       - name: grpc-server
         image: 074047115132.dkr.ecr.us-east-1.amazonaws.com/server:8f1df9744deaca4ac51d56355086779c916d54f6
         imagePullPolicy: Always
-        volumeMounts:
-          - name: grpc-server-secrets
-            mountPath: "/mnt/secrets-store"
-            readOnly: true
         ports:
         - containerPort: 8085
         env:
