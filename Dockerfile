@@ -18,4 +18,4 @@ RUN echo $(cat app.env)
 
 # Use shell script to support passing application name and its arguments to the ENTRYPOINT
 EXPOSE 8085
-ENTRYPOINT java -DHOST=$HOST -DPORT=$PORT -DDBNAME=$DBNAME -DUSER=$USER -DPASSWORD=$PWD -cp grpc-server-1.0.jar com.example.Main.Main
+ENTRYPOINT java -DHOST=$PG_HOST -DPORT=$PG_PORT -DDBNAME=$PG_DB -DUSER=$PG_USER -DPASSWORD=$PG_PASS -cp grpc-server-1.0.jar com.example.Main.Main
