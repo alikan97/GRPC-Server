@@ -13,11 +13,7 @@ COPY app.env .
 RUN echo $(ls)
 RUN echo $(cat app.env)
 
-RUN source <(cat app.env \
-  | sed -E '/^\s*#.*/d' \
-  | tr '\n' '\000' \
-  | sed -z -E 's/^([^=]+)=(.*)/\1\x0\2/g' \
-  | xargs -0 -n2 bash -c 'printf "export %s=%q;\n" "${@}"' /dev/null)
+RUN source app.env
 
 RUN echo $PG_HOST
 
