@@ -9,14 +9,18 @@ FROM openjdk:16.0.2-jdk-buster
 WORKDIR /app
 COPY --from=builder /app/target/grpc-server-1.0.jar .
 COPY app.env .
+COPY /app/parseVariables.sh .
+
+RUN chmod +x parseVariables.sh
+RUN parseVariables.sh
 
 RUN echo $(ls)
-
-RUN export $(xargs < app.env)
-
 RUN echo $(cat app.env)
 
+# RUN export $(xargs < app.env)
+
 RUN echo $PG_HOST
+
 # Use shell script to support passing application name and its arguments to the ENTRYPOINT
 EXPOSE 8085
 ENTRYPOINT java -DHOST=$PG_HOST -DPORT=$PG_PORT -DDBNAME=$PG_DB -DUSER=$PG_USER -DPASSWORD=$PG_PASS -cp grpc-server-1.0.jar com.example.Main.Main
