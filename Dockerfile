@@ -13,7 +13,7 @@ COPY app.env .
 RUN echo $(ls)
 RUN echo $(cat app.env)
 
-RUN export $(grep -v '^#' app.env | xargs)
+RUN export $(cat app.env | xargs) 
 
 RUN echo $PG_HOST
 
