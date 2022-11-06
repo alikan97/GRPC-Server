@@ -8,7 +8,7 @@ RUN mvn -f /app/pom.xml clean package
 FROM openjdk:16.0.2-jdk-buster
 WORKDIR /app
 COPY --from=builder /app/target/grpc-server-1.0.jar .
-COPY --from=builder app.env .
+COPY app.env .
 
 RUN echo $(ls)
 
