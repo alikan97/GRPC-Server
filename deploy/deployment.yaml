@@ -16,7 +16,44 @@ spec:
     spec:
       containers:
       - name: grpc-server
-        image: 074047115132.dkr.ecr.us-east-1.amazonaws.com/server:latest
+        image: 074047115132.dkr.ecr.us-east-1.amazonaws.com/server:b07b7257bfbc580f6ffd2884365dd0ee6b92af06
         imagePullPolicy: Always
+        volumeMounts:
+          - name: grpc-server-secrets
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
         ports:
         - containerPort: 8085
+        env:
+          - name: PG_HOST
+            valueFrom:
+              secretKeyRef:
+                name: PG_HOST
+                key: PG_HOST
+          - name: PG_PORT
+            valueFrom:
+              secretKeyRef:
+                name: PG_PORT
+                key: PG_PORT
+          - name: PG_USER
+            valueFrom:
+              secretKeyRef:
+                name: PG_USER
+                key: PG_USER
+          - name: PG_COPG_PASSNFIG
+            valueFrom:
+              secretKeyRef:
+                name: PG_PASS
+                key: PG_PASS
+          - name: PG_DB
+            valueFrom:
+              secretKeyRef:
+                name: PG_DB
+                key: PG_DB
+      volumes:
+        - name: grpc-server-secrets
+          csi:
+            driver: secrets-store.csi.x-k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: grpc-server-secrets
